@@ -18,12 +18,14 @@ import {
 import { Select } from '../select';
 import { Text } from '../text';
 
-export const ArticleParamsForm = ({
-	selected,
-	setSelected,
-}: {
+interface ArticleParamsFormProps {
 	selected: ArticleStateType;
 	setSelected: (value: ArticleStateType) => void;
+}
+
+export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
+	selected,
+	setSelected,
 }) => {
 	//открытие aside
 	const [isAsideOpen, setIsAsideOpen] = useState(false);
@@ -42,19 +44,19 @@ export const ArticleParamsForm = ({
 
 	const resetForm = () => {
 		setSelected(defaultArticleState);
-		setInputСhange(defaultArticleState);
+		setInputChange(defaultArticleState);
 	};
 
 	// изменения состояние формы
-	const [inputСhange, setInputСhange] = useState(selected);
+	const [inputChange, setInputChange] = useState(selected);
 
 	const handleChange = (newState: ArticleStateType) => {
-		setInputСhange(newState);
+		setInputChange(newState);
 	};
 
 	const handleSubmit = useCallback(() => {
-		setSelected(inputСhange);
-	}, [inputСhange]);
+		setSelected(inputChange);
+	}, [inputChange]);
 
 	return (
 		<>
@@ -66,67 +68,67 @@ export const ArticleParamsForm = ({
 				}`}>
 				{isAsideOpen && (
 					<form className={styles.form}>
-						<div style={{ marginBlockEnd: '50px' }}>
+						<div>
 							<Text size={31} weight={800} uppercase align='left'>
 								задайте параметры
 							</Text>
 						</div>
-						<div style={{ marginBlockEnd: '50px' }}>
+						<div>
 							<Select
 								options={fontFamilyOptions}
 								title={'Шрифт'}
-								selected={inputСhange.fontFamilyOption}
+								selected={inputChange.fontFamilyOption}
 								onChange={(newfontFamily) =>
 									handleChange({
-										...inputСhange,
+										...inputChange,
 										fontFamilyOption: newfontFamily,
 									})
 								}
 							/>
 						</div>
-						<div style={{ marginBlockEnd: '50px' }}>
+						<div>
 							<RadioGroup
 								id={selected.fontSizeOption.value}
 								name={'fontsize'}
 								options={fontSizeOptions}
-								selected={inputСhange.fontSizeOption}
+								selected={inputChange.fontSizeOption}
 								title={'размер шрифта'}
 								onChange={(newFontSize) =>
-									handleChange({ ...inputСhange, fontSizeOption: newFontSize })
+									handleChange({ ...inputChange, fontSizeOption: newFontSize })
 								}
 							/>
 						</div>
-						<div style={{ marginBlockEnd: '100px' }}>
+						<div>
 							<Select
 								options={fontColors}
 								title={'цвет шрифта'}
-								selected={inputСhange.fontColor}
+								selected={inputChange.fontColor}
 								onChange={(newFontColor) =>
-									handleChange({ ...inputСhange, fontColor: newFontColor })
+									handleChange({ ...inputChange, fontColor: newFontColor })
 								}
 							/>
 						</div>
-						<div style={{ marginBlockEnd: '50px' }}>
+						<div>
 							<Select
 								options={backgroundColors}
 								title={'цвет фона'}
-								selected={inputСhange.backgroundColor}
+								selected={inputChange.backgroundColor}
 								onChange={(newBackgroundColor) =>
 									handleChange({
-										...inputСhange,
+										...inputChange,
 										backgroundColor: newBackgroundColor,
 									})
 								}
 							/>
 						</div>
-						<div style={{ marginBlockEnd: '50px' }}>
+						<div>
 							<Select
 								options={contentWidthArr}
 								title={'ширина контента'}
-								selected={inputСhange.contentWidth}
+								selected={inputChange.contentWidth}
 								onChange={(newContentWidth) =>
 									handleChange({
-										...inputСhange,
+										...inputChange,
 										contentWidth: newContentWidth,
 									})
 								}
